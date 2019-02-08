@@ -44,7 +44,7 @@ public class IarParserTest extends ParserTester {
     public void IAR_error_size() throws IOException {
         Collection<FileAnnotation> warnings = new IarParser().parse(openFile("issue8823.txt"));
 
-        assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 6, warnings.size());
+        assertEquals(WRONG_NUMBER_OF_WARNINGS_DETECTED, 7, warnings.size());
     }
 
     /**
@@ -136,6 +136,22 @@ public class IarParserTest extends ParserTester {
         checkWarning(annotation, 0, "cannot open source file \"c:\\JenkinsJobs\\900ZH\\Workspace\\Lib\\Drivers\\_Obsolete\\Uart\\UartInterface.c\"",
                 "\"c:/JenkinsJobs/900ZH/Workspace/Lib/Drivers/_Obsolete/Uart/UartInterface.c\"",
                 "Pe1696", Priority.HIGH);
+    }
+
+
+    /**
+     * Parses a file and check error number 7
+     *
+     * @throws IOException
+     *      if the file could not be read
+     * @see <a href="http://issues.jenkins-ci.org/browse/JENKINS-8823">Issue 8823</a>
+     */
+    @Test
+    public void IAR_error7() throws IOException {
+        FileAnnotation annotation = getErrorNumber(7);
+        checkWarning(annotation, 861, "function \"FlashErase\" was declared but never referenced",
+                "d:/jenkins/workspace/Nightly/src/flash/flashdrv.c",
+                "Pe177", Priority.NORMAL);
     }
 
     @Override

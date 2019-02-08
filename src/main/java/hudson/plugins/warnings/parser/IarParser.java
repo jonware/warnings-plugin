@@ -16,6 +16,7 @@ import hudson.plugins.analysis.util.model.Priority;
  * @author Claus Klein
  * @author Ullrich Hafner
  * @author Kay van der Zander
+ * @author Jon Ware
  * @deprecated use the new analysis-model library
  */
 @Deprecated
@@ -26,8 +27,8 @@ public class IarParser extends RegexpLineParser {
     
     // search for: Fatal Error[Pe1696]: cannot open source file "c:\filename.c"
     // search for: c:\filename.h(17) : Fatal Error[Pe1696]: cannot open source file "System/ProcDef_LPC17xx.h"
-    private static final String IAR_WARNING_PATTERN = 
-"((\\[exec\\] )?(.*)\\((\\d+)\\)?.*)?(Fatal [Ee]rror|Remark|Warning)\\[(\\w+)\\]: (.*(\\\".*(c|h)\\\")|.*)";
+    private static final String IAR_WARNING_PATTERN =
+            "((\\[exec\\] )?\\\"?(.*?)\\\"?[\\(,](\\d+)\\)?.*)?(Fatal [Ee]rror|Remark|Warning)\\[(\\w+)\\]: (.*(\\\".*(c|h)\\\")|.*)";
     /**
      * Creates a new instance of {@link IarParser}.
      */
